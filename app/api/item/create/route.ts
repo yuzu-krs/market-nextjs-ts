@@ -20,10 +20,12 @@ export async function POST(request:Request): Promise<NextResponse>{
         });
 
         return NextResponse.json({message:"アイテム作成",post:newPost});
-    }catch{
-        return NextResponse.json({message:"アイテム失敗"},{status:500});
-        
-    }finally{
+    } catch (error) {
+        // Error型にキャスト
+        const err = error as Error;  // Type assertion
+        console.error("アイテム作成失敗:", err.message); // エラーメッセージを表示
+        return NextResponse.json({ message: "アイテム作成失敗", error: err.message || "Unknown error" }, { status: 500 });
+    } finally {
         await prisma.$disconnect();
     }
     
