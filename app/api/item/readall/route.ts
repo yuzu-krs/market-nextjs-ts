@@ -16,3 +16,5 @@ export async function GET(): Promise<NextResponse>{
         await prisma.$disconnect();
     }
 }
+
+export const revalidate:number=0
