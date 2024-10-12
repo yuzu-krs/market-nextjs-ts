@@ -11,6 +11,7 @@ export async function GET(): Promise<NextResponse>{
         return NextResponse.json({message:"アイテム読み取り成功",posts:posts});
 
     }catch(error){
+        console.error("アイテム読み取り失敗:", error);
         return NextResponse.json({message:"アイテム読み取り失敗",status:500});
     }finally{
         await prisma.$disconnect();
