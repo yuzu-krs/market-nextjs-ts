@@ -4,8 +4,13 @@ import type { NextConfig } from "next";
 import { auth } from "@/auth";
 
 export async function middleware(request: NextRequest) {
+
+
+
     // セッションを取得
     const session = await auth(); // auth関数を使ってセッション情報を取得
+    
+    
 
     console.log(session)
     // 認証されている場合は次の処理に進む
