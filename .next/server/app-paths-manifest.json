@@ -1,5 +1,7 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
-  "/api/item/readall/route": "app/api/item/readall/route.js"
+  "/item/readsingle/[id]/page": "app/item/readsingle/[id]/page.js",
+  "/api/item/readall/route": "app/api/item/readall/route.js",
+  "/api/item/readsingle/[id]/route": "app/api/item/readsingle/[id]/route.js"
 }

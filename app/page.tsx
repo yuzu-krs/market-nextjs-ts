@@ -1,3 +1,5 @@
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const getAllItems=async() =>{
@@ -12,16 +14,22 @@ const ReadAllItems =async()=>{
     return (
 
         <div>
-            <h1 className="text-red-500">Hello</h1>    
-            <h2>World</h2>
-            {allItems.map(item=>
-                <div>
-                    <img src={item.image}/>
+            {allItems.map((item:any)=>(
+
+                <Link href={`/item/readsingle/${item.id}`} key={item.id} >
+                    <Image 
+                        src={item.image} // 画像のURL
+                        width={750} // 画像の幅
+                        height={500} // 画像の高さ
+                        alt="item-image" // 代替テキスト
+                        priority // ページの最適化のための優先度を高める
+                    />
+                    
                     <h2>{item.price}</h2>
                     <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                </div>
-            )}
+                    <p>{item.description.substring(0,80)}</p>
+                </Link>
+            ))}
         </div>
 
     );
