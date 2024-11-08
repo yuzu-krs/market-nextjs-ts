@@ -1,7 +1,13 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
   "/page": "app/page.js",
+  "/item/create/page": "app/item/create/page.js",
   "/item/readsingle/[id]/page": "app/item/readsingle/[id]/page.js",
+  "/item/update/[id]/page": "app/item/update/[id]/page.js",
+  "/item/delete/[id]/page": "app/item/delete/[id]/page.js",
+  "/api/item/readsingle/[id]/route": "app/api/item/readsingle/[id]/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
   "/api/item/readall/route": "app/api/item/readall/route.js",
-  "/api/item/readsingle/[id]/route": "app/api/item/readsingle/[id]/route.js"
+  "/api/item/delete/[id]/route": "app/api/item/delete/[id]/route.js",
+  "/api/item/update/[id]/route": "app/api/item/update/[id]/route.js",
+  "/api/item/create/route": "app/api/item/create/route.js"
 }

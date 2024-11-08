@@ -16,15 +16,16 @@ export async function PUT(request: Request, { params }: { params: { id: string }
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    // ログインしているユーザーのメールアドレス
-    const userEmail = session.user.email;
+    // ログインしているユーザーのメールアドレスを仮に生成
+    const userEmail = `${session.user.name}@example.com`;  // name@example.com
 
     // リクエストのメールアドレスがログインしているユーザーのメールアドレスと一致するか確認
-    if (data.email !== userEmail) {
+    if (data.email.toLowerCase() !== userEmail.toLowerCase()) {
         return NextResponse.json({ message: "Unauthorized: Email does not match" }, { status: 403 });
     }
 
     try {
+        // アイテムを更新
         const updatePost = await prisma.post.update({
             where: { id: postId },
             data: {
@@ -36,11 +37,15 @@ export async function PUT(request: Request, { params }: { params: { id: string }
             },
         });
 
+        // 更新に成功した場合
         return NextResponse.json({ message: "アイテム編集成功", post: updatePost });
+
     } catch (error) {
-        console.error("Update error:", error); // エラーをログに記録
-        return NextResponse.json({ message: "アイテム編集失敗", status: 500 });
+        // エラーハンドリングの強化: エラー詳細をログに記録
+        console.error("Error updating post:", error);
+        return NextResponse.json({ message: "アイテム編集失敗", }, { status: 500 });
     } finally {
+        // Prisma クライアントの切断処理
         await prisma.$disconnect();
     }
 }

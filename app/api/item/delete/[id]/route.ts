@@ -15,8 +15,8 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
         return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
 
-    // ログインしているユーザーのメールアドレス
-    const userEmail = session.user.email;
+    // ログインしているユーザーのメールアドレスを仮に生成（session.user.name を使って）
+    const userEmail = `${session.user.name}@example.com`;  // 例: name@example.com
 
     try {
         // 削除対象のポストを取得
@@ -39,10 +39,11 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
             where: { id: postId },
         });
 
+        // 成功レスポンス
         return NextResponse.json({ message: "アイテム削除成功", post: deletedPost });
     } catch (error) {
         console.error("Delete error:", error); // エラーをログに記録
-        return NextResponse.json({ message: "アイテム削除失敗", status: 500 });
+        return NextResponse.json({ message: "アイテム削除失敗",  }, { status: 500 });
     } finally {
         await prisma.$disconnect();
     }
